@@ -6,6 +6,17 @@ import sys
 
 PORT = 5555
 running = True
+import os
+
+def clear():
+    os.system("clear")
+
+def show_logo():
+    try:
+        with open("logo.txt", "r") as f:
+            print(f.read())
+    except FileNotFoundError:
+        print("[Logo file not found]")
 
 def stop_all(sig, frame):
     global running
@@ -49,7 +60,9 @@ def connect(onion):
     s.connect((onion, PORT))
     print("[Connected]")
     chat(s)
-
+clear()
+show_logo()
+print("\n")
 mode = input("Host (h) or Connect (c)? ")
 
 if mode.lower() == "h":
@@ -57,3 +70,4 @@ if mode.lower() == "h":
 else:
     onion = input("Enter .onion address: ")
     connect(onion)
+
